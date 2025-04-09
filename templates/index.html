@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DALL-E Image Gallery</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Purple banner section at the top */
+        .purple-side {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: #4B2E83; /* UW Purple */
+            opacity: 0.85;
+            z-index: 0;
+        }
+
+        .title-wrapper {
+            position: relative;
+            padding-top: 50px;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .title-wrapper h1 {
+            font-size: 28px;
+            color: black;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            margin-top: 6px;
+            color: black;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        input[type="text"] {
+            font-size: 16px;
+            padding: 10px 20px;
+            width: 200px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            width: 180px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .gallery-header {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .gallery-header h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .gallery img {
+            max-width: 220px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .image-wrapper img {
+            width: 100px;
+            height: auto;
+        }
+
+        .top-left-logo {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            z-index: 3;
+        }
+
+        .top-right-logo {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Purple Banner -->
+    <div class="purple-side"></div>
+
+    <!-- UW Logos -->
+    <div class="top-left-logo image-wrapper">
+        <img src="https://images.seeklogo.com/logo-png/32/1/washington-huskies-logo-png_seeklogo-326188.png" alt="UW Logo Left">
+    </div>
+    <div class="top-right-logo image-wrapper">
+        <img src="https://images.seeklogo.com/logo-png/32/1/washington-huskies-logo-png_seeklogo-326189.png" alt="UW Logo Right">
+    </div>
+
+    <!-- Title & Subtitle -->
+    <div class="title-wrapper">
+        <h1>UW-Themed DALL-E Image Gallery</h1>
+        <div class="subtitle">Inclusive AI API Workshop</div>
+
+        <!-- Prompt Form -->
+        <form method="POST">
+            <input type="text" name="prompt" placeholder="Enter your image prompt" required>
+            <button type="submit">Generate Image</button>
+        </form>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-header">
+        <hr style="width: 80%;">
+        <h2>Gallery</h2>
+    </div>
+
+    <div class="gallery">
+        {% for image in images %}
+            <div>
+                <img src="{{ url_for('static', filename='images/' + image) }}" alt="Generated Image">
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
